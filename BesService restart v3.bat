@@ -22,6 +22,7 @@ Set /P ID= Please Enter Server Name :
 Ping %ID% -n 1
 IF %ERRORLEVEL% NEQ 0 Goto Error
 
+REM Using Taskkill for this as the Besclient service is often crashed
 For /f "tokens=1,2 delims=: " %%a in ('sc \\%ID% Queryex Besclient ^| find "PID"') do (
 	if "%%a"=="PID" set PID=%%b
 )
